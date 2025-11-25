@@ -647,6 +647,11 @@
       scroll-behavior: smooth;
     }
   </style>
+    <!-- Added Leaflet CSS and JS in the head -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- HEADER -->
@@ -764,7 +769,34 @@
     </div>
   </section>
 
-  <!-- CONTACT SECTION -->
+    <!-- UBICACIÓN / MAP SECTION -->
+    <section id="ubicacion">
+      <div class="container">
+        <div class="section-header">
+          <h2>¿Dónde Encontrarnos?</h2>
+          <p>Visítanos en nuestra ubicación en Tampico</p>
+        </div>
+        <div class="map-container">
+          <div id="mapa" class="map"></div>
+        </div>
+        <div class="ubicacion-info">
+          <div class="info-card">
+            <h3>📍 Ubicación</h3>
+            <p><strong>Papelería Vignol</strong></p>
+            <p>Lomas de Rosales 387</p>
+            <p>Tampico, Tamaulipas</p>
+          </div>
+          <div class="info-card">
+            <h3>⏰ Horarios</h3>
+            <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+            <p>Sábado: 9:00 AM - 5:00 PM</p>
+            <p>Domingo: Cerrado</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
   <section id="contacto">
     <div class="contact-blob"></div>
     <div class="contact-container">
@@ -861,5 +893,7 @@
       });
     });
   </script>
+  <!-- Include external script file -->
+  <script src="script.js"></script>
 </body>
 </html>
