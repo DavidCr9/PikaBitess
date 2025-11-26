@@ -1,69 +1,49 @@
-// Script centralizado: inicializaciones y handlers sin eliminar lógica previa
+// Active navigation link
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Inicialización de Leaflet (si está cargado y existe el contenedor) ---
-  if (window.L && document.getElementById("mapa")) {
-    try {
-      // Coordenadas aproximadas de Tampico, Tamaulipas
-      const coordinates = [22.2757, -97.8639]
+  const currentPage = window.location.pathname.split("/").pop() || "index.html"
+  const navLinks = document.querySelectorAll(".nav-link")
 
-      // Crear el mapa
-      const mapa = L.map("mapa").setView(coordinates, 16)
-
-      // Agregar tiles de OpenStreetMap
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "© OpenStreetMap contributors",
-        maxZoom: 19,
-      }).addTo(mapa)
-
-      // Agregar marcador con popup
-      const marker = L.marker(coordinates).addTo(mapa)
-      marker
-        .bindPopup(`
-        <div style="text-align: center;">
-          <h4 style="margin: 0 0 0.5rem 0; color: #ff1493;">Papelería Vignol</h4>
-          <p style="margin: 0.25rem 0; font-size: 0.9rem;">Lomas de Rosales 387</p>
-          <p style="margin: 0.25rem 0; font-size: 0.9rem;">Tampico, Tamaulipas</p>
-        </div>
-      `)
-        .openPopup()
-    } catch (err) {
-      // en caso de error evitamos romper el resto del script
-      console.error("Error inicializando Leaflet:", err)
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href")
+    if (href === currentPage || (currentPage === "" && href === "index.html")) {
+      link.classList.add("active")
+    } else {
+      link.classList.remove("active")
     }
-  }
+  })
 
-  // --- Manejo del menú móvil (compatible con distintos id/class existentes) ---
-  const menuToggle = document.getElementById("menuToggle") || document.querySelector(".menu-toggle")
-  const nav = document.getElementById("nav") || document.getElementById("mobileMenu") || document.querySelector("nav")
-
-  if (menuToggle && nav) {
-    // Evitar doble listener si ya se agregó en otro lugar
-    const addToggle = () => menuToggle.addEventListener("click", () => nav.classList.toggle("active"))
-    // Sólo añadir si no está añadido (no fiable 100% pero útil)
-    try {
-      addToggle()
-    } catch (e) {
-      console.warn("No se pudo añadir listener del menú:", e)
-    }
-  }
-
-  // Cerrar menú al hacer clic en un enlace (buscamos en posibles selectores)
-  document.querySelectorAll(".nav a, .mobile-menu a, nav a").forEach((link) => {
-    link.addEventListener("click", () => {
-      if (nav) nav.classList.remove("active")
+  // Smooth scroll for anchor links
+  const anchorLinks = document.querySelectorAll('a[href^="#"]')
+  anchorLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault()
+      const target = document.querySelector(link.getAttribute("href"))
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
     })
   })
 
-  // Scroll suave para anclas internas
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const href = this.getAttribute("href")
-      if (!href || href === "#") return
-      const target = document.querySelector(href)
-      if (target) {
-        e.preventDefault()
-        target.scrollIntoView({ behavior: "smooth" })
+  // Add animation on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = "1"
+        entry.target.style.transform = "translateY(0)"
       }
     })
+  }, observerOptions)
+
+  const animatedElements = document.querySelectorAll(".benefit-card, .product-card, .contact-card")
+  animatedElements.forEach((el) => {
+    el.style.opacity = "0"
+    el.style.transform = "translateY(30px)"
+    el.style.transition = "opacity 0.6s ease, transform 0.6s ease"
+    observer.observe(el)
   })
 })

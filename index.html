@@ -1,899 +1,105 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PIKA BITESS - Dulces Enchilados</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-      background-color: #000;
-      color: #fff;
-      line-height: 1.6;
-    }
-
-    /* HEADER */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background-color: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(236, 72, 153, 0.3);
-    }
-
-    .header-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0.8rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: auto;
-    }
-
-    .logo {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 12px;
-      overflow: hidden;
-    }
-
-    .logo img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    nav {
-      display: none;
-      gap: 2rem;
-    }
-
-    @media (min-width: 768px) {
-      nav {
-        display: flex;
-      }
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #f472b6;
-    }
-
-    .menu-toggle {
-      display: block;
-      background: none;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      font-size: 24px;
-    }
-
-    @media (min-width: 768px) {
-      .menu-toggle {
-        display: none;
-      }
-    }
-
-    /* HERO SECTION */
-    #inicio {
-      position: relative;
-      padding: 80px 1rem;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom right, rgba(236, 72, 153, 0.2), #000, rgba(153, 27, 27, 0.2));
-      z-index: -1;
-    }
-
-    .hero-blobs {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .blob1 {
-      position: absolute;
-      top: 80px;
-      right: 0;
-      width: 384px;
-      height: 384px;
-      background-color: rgba(236, 72, 153, 0.1);
-      border-radius: 50%;
-      filter: blur(80px);
-    }
-
-    .blob2 {
-      position: absolute;
-      bottom: 80px;
-      left: 0;
-      width: 384px;
-      height: 384px;
-      background-color: rgba(220, 38, 38, 0.1);
-      border-radius: 50%;
-      filter: blur(80px);
-    }
-
-    .hero-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    @media (min-width: 1024px) {
-      .hero-container {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .hero-content h1 {
-      font-size: 3rem;
-      font-weight: 900;
-      line-height: 1.2;
-      margin-bottom: 2rem;
-    }
-
-    @media (min-width: 1024px) {
-      .hero-content h1 {
-        font-size: 4.5rem;
-      }
-    }
-
-    .gradient-text-pink {
-      background: linear-gradient(to right, #f472b6, #fb7185, #fb923c);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .gradient-text-orange {
-      background: linear-gradient(to right, #fb923c, #fb7185);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-subtitle {
-      font-size: 1.875rem;
-      font-weight: 700;
-      color: #fbcfe8;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-description {
-      font-size: 1.25rem;
-      color: #d1d5db;
-      line-height: 1.8;
-      margin-bottom: 2rem;
-    }
-
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .btn {
-      padding: 1.5rem 2rem;
-      font-size: 1.125rem;
-      font-weight: 700;
-      border-radius: 9999px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .btn-primary {
-      background: linear-gradient(to right, #ec4899, #dc2626);
-      color: #fff;
-      box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(to right, #db2777, #b91c1c);
-      transform: scale(1.05);
-    }
-
-    .btn-secondary {
-      background-color: transparent;
-      border: 2px solid #f97316;
-      color: #fcd34d;
-    }
-
-    .btn-secondary:hover {
-      background-color: rgba(249, 115, 22, 0.2);
-    }
-
-    .hero-image {
-      position: relative;
-    }
-
-    .image-glow {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom right, rgba(236, 72, 153, 1), rgba(239, 68, 68, 1), rgba(249, 115, 22, 1));
-      border-radius: 1rem;
-      filter: blur(32px);
-      opacity: 0.4;
-      z-index: -1;
-    }
-
-    .hero-image img {
-      width: 100%;
-      height: auto;
-      border-radius: 1rem;
-      box-shadow: 0 25px 50px rgba(236, 72, 153, 0.4);
-      border: 1px solid rgba(236, 72, 153, 0.5);
-    }
-
-    /* PRODUCTS SECTION */
-    #productos {
-      padding: 80px 1rem;
-      background: linear-gradient(to bottom, #000, #000, #111);
-    }
-
-    .products-container {
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-header h2 {
-      font-size: 2.25rem;
-      font-weight: 900;
-      margin-bottom: 1rem;
-    }
-
-    @media (min-width: 1024px) {
-      .section-header h2 {
-        font-size: 3rem;
-      }
-    }
-
-    .section-header p {
-      font-size: 1.125rem;
-      color: #d1d5db;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      margin-bottom: 4rem;
-    }
-
-    @media (min-width: 768px) {
-      .products-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .product-card {
-      position: relative;
-      background: linear-gradient(to bottom, rgba(31, 41, 55, 1), #000);
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(236, 72, 153, 0.3);
-      transition: all 0.3s;
-    }
-
-    .product-card:hover {
-      border-color: rgba(236, 72, 153, 0.6);
-    }
-
-    .product-card:hover .product-image img {
-      transform: scale(1.1);
-    }
-
-    .product-image {
-      position: relative;
-      height: 256px;
-      overflow: hidden;
-      background-color: #111;
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-
-    .product-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-    }
-
-    .product-content {
-      padding: 1.5rem;
-    }
-
-    .product-content h3 {
-      font-size: 1.5rem;
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-    }
-
-    .product-content p {
-      color: #d1d5db;
-      margin-bottom: 1rem;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background: linear-gradient(to right, #ec4899, #dc2626);
-      color: #fff;
-      border-radius: 9999px;
-      font-size: 0.875rem;
-      font-weight: 700;
-    }
-
-    .badge-orange {
-      background: linear-gradient(to right, #f97316, #dc2626);
-    }
-
-    .badge-yellow {
-      background: linear-gradient(to right, #eab308, #dc2626);
-    }
-
-    /* Instagram CTA in Products */
-    .instagram-cta {
-      background: linear-gradient(to right, rgba(236, 72, 153, 0.2), rgba(239, 68, 68, 0.2));
-      border: 2px solid rgba(236, 72, 153, 0.5);
-      border-radius: 1rem;
-      padding: 2.5rem;
-      text-align: center;
-      backdrop-filter: blur(10px);
-    }
-
-    .instagram-cta p {
-      font-size: 1.25rem;
-      color: #d1d5db;
-      margin-bottom: 1.5rem;
-      font-weight: 600;
-    }
-
-    .btn-instagram {
-      display: inline-flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 2.5rem;
-      background: linear-gradient(to right, #ec4899, #dc2626, #f97316);
-      color: #fff;
-      font-weight: 900;
-      font-size: 1.125rem;
-      border: none;
-      border-radius: 9999px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s;
-      box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
-    }
-
-    .btn-instagram:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 40px rgba(236, 72, 153, 0.7);
-    }
-
-    /* CONTACT SECTION */
-    #contacto {
-      padding: 80px 1rem;
-      background-color: #000;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-blob {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 384px;
-      height: 384px;
-      background-color: rgba(220, 38, 38, 0.05);
-      border-radius: 50%;
-      filter: blur(80px);
-      z-index: 0;
-    }
-
-    .contact-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      max-width: 600px;
-      margin: 4rem auto 0;
-    }
-
-    @media (min-width: 768px) {
-      .contact-cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .contact-card {
-      background: linear-gradient(to bottom right, rgba(236, 72, 153, 0.3), rgba(220, 38, 38, 0.3));
-      border-radius: 1rem;
-      padding: 2rem;
-      border: 2px solid rgba(236, 72, 153, 0.6);
-      backdrop-filter: blur(10px);
-      transition: border-color 0.3s;
-    }
-
-    .contact-card:hover {
-      border-color: rgba(236, 72, 153, 0.8);
-    }
-
-    .contact-card.orange {
-      background: linear-gradient(to bottom right, rgba(249, 115, 22, 0.3), rgba(220, 38, 38, 0.3));
-      border-color: rgba(249, 115, 22, 0.6);
-    }
-
-    .contact-card.orange:hover {
-      border-color: rgba(249, 115, 22, 0.8);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .card-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: linear-gradient(to bottom right, #ec4899, #dc2626);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
-    }
-
-    .card-icon.orange {
-      background: linear-gradient(to bottom right, #f97316, #dc2626);
-      box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
-    }
-
-    .card-icon svg {
-      width: 28px;
-      height: 28px;
-      color: #fff;
-    }
-
-    .card-header h3 {
-      font-size: 1.5rem;
-      font-weight: 900;
-    }
-
-    .contact-card p {
-      font-size: 1.125rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .contact-card a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.5rem;
-      font-weight: 900;
-      transition: color 0.3s;
-    }
-
-    .contact-card a:hover {
-      color: #fbcfe8;
-    }
-
-    .contact-card p:last-child {
-      font-weight: 400;
-      font-size: 1rem;
-      color: #d1d5db;
-      margin-bottom: 0;
-    }
-
-    .contact-cta {
-      text-align: center;
-      margin-top: 4rem;
-    }
-
-    .contact-cta h3 {
-      font-size: 1.875rem;
-      font-weight: 900;
-      margin-bottom: 2rem;
-    }
-
-    /* FOOTER */
-    footer {
-      background-color: #0f172a;
-      color: #fff;
-      padding: 3rem 1rem;
-      border-top: 1px solid rgba(236, 72, 153, 0.2);
-    }
-
-    .footer-container {
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    @media (min-width: 768px) {
-      .footer-content {
-        flex-direction: row;
-      }
-    }
-
-    .footer-text {
-      text-align: center;
-    }
-
-    .footer-text p {
-      color: #9ca3af;
-      font-weight: 600;
-    }
-
-    .footer-text p.small {
-      color: #6b7280;
-      font-size: 0.875rem;
-      margin-top: 0.5rem;
-    }
-
-    .footer-text.right {
-      text-align: right;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(55, 65, 81, 1);
-      padding-top: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    .footer-bottom a {
-      color: #9ca3af;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .footer-bottom a:hover {
-      color: #f472b6;
-      transform: scale(1.1);
-    }
-
-    .footer-bottom svg {
-      width: 28px;
-      height: 28px;
-    }
-
-    /* Mobile Menu */
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      gap: 1rem;
-      padding-bottom: 1rem;
-    }
-
-    .mobile-menu.active {
-      display: flex;
-    }
-
-    .mobile-menu a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    .mobile-menu a:hover {
-      color: #f472b6;
-    }
-
-    /* Scroll Behavior */
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
-    <!-- Added Leaflet CSS and JS in the head -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-
-    <link rel="stylesheet" href="style.css" />
+  <title>PikaBitess - Dulces Enchilados</title>
+  <meta name="description" content="Dulces enchilados auténticos con sabor que enamora">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="header-container">
-      <div class="logo"><img src="pika1.jpg" alt="PIKA BITESS"></div>
-      <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#productos">Productos</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-      <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#inicio">Inicio</a>
-      <a href="#productos">Productos</a>
-      <a href="#contacto">Contacto</a>
-    </div>
-  </header>
-
-  <!-- HERO SECTION -->
-  <section id="inicio">
-    <div class="hero-bg"></div>
-    <div class="hero-blobs">
-      <div class="blob1"></div>
-      <div class="blob2"></div>
-    </div>
-    <div class="hero-container">
-      <div class="hero-content">
-        <h1>
-          <span class="gradient-text-pink">Pick a bite</span><br>
-          <span class="gradient-text-orange">of spicy!</span>
-        </h1>
-        <p class="hero-subtitle">Dulces Enchilados</p>
-        <p class="hero-description">
-          Experimenta la verdadera explosión de sabor. Nuestros dulces enchilados combinan lo mejor de la tradición mexicana con un toque de picante auténtico.
-        </p>
-        <div class="button-group">
-          <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({ behavior: 'smooth' })">
-            Ver Productos
-          </button>
-          <button class="btn btn-secondary" onclick="document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' })">
-            Contactar
-          </button>
-        </div>
+  <!-- Navigation -->
+  <nav class="navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="/images/image.png" alt="PikaBitess Logo" class="nav-logo">
+        <span class="nav-title">PikaBitess</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">Inicio</a>
+        <a href="productos.html" class="nav-link">Productos</a>
+        <a href="contacto.html" class="nav-link">Contacto</a>
       </div>
-      <div class="hero-image">
-        <div class="image-glow"></div>
-        <img src="pika1.jpg" alt="PIKA BITESS - Dulces enchilados">
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="logo-container">
+        <img src="/images/image.png" alt="PikaBitess Logo" class="hero-logo">
+      </div>
+      <h1 class="hero-title">Pick a bite of spicy!</h1>
+      <p class="hero-subtitle">Dulces enchilados auténticos con el sabor que enamora</p>
+      <div class="hero-buttons">
+        <a href="productos.html" class="btn btn-primary">Ver Productos</a>
+        <a href="contacto.html" class="btn btn-secondary">Contáctanos</a>
       </div>
     </div>
   </section>
 
-  <!-- PRODUCTS SECTION -->
-  <section id="productos">
-    <div class="products-container">
-      <div class="section-header">
-        <h2><span class="gradient-text-pink">Nuestra Variedad</span></h2>
-        <p>Descubre todos nuestros deliciosos productos enchilados</p>
-      </div>
-
-      <div class="products-grid">
-        <!-- Product 1 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="panditas.jpg" alt="Gomitas Enchiladas">
-            <div class="product-overlay"></div>
-          </div>
-          <div class="product-content">
-            <h3>Panditas Enchilados</h3>
-            <p>Un clásico con un giro: nuestras gomitas Panditas te sorprenderán con su sabor único y su toque picante que te hará querer más.</p>
-            <span class="badge">Bestseller</span>
-          </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="xtremes.jpg" alt="Tiras Enchiladas">
-            <div class="product-overlay"></div>
-          </div>
-          <div class="product-content">
-            <h3>Xtremes Enchiladas</h3>
-            <p>¡Explosión de sabor y picante! Disfruta de nuestras gomitas Xtremes, el toque perfecto para los que buscan una experiencia intensa.</p>
-            <span class="badge badge-orange">Favorita</span>
-          </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="aros.jpg" alt="Pikazmis">
-            <div class="product-overlay"></div>
-          </div>
-          <div class="product-content">
-            <h3>Aros de Sandía Enchilados</h3>
-            <p>Deliciosos aros de sandía, ¡con el equilibrio ideal entre dulce y picante! Perfectos para los amantes del sabor refrescante con un toque atrevido.</p>
-            <span class="badge badge-yellow">Exclusiva</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Instagram CTA -->
-      <div class="instagram-cta">
-        <p>Ver el menú completo y novedades en Instagram</p>
-        <a href="https://instagram.com/pika.bitess" target="_blank" rel="noopener noreferrer" class="btn-instagram">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <circle cx="17.5" cy="6.5" r="1.5"></circle>
+  <!-- Benefits Section -->
+  <section class="benefits">
+    <div class="benefits-container">
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
           </svg>
-          @pika.bitess
-        </a>
+        </div>
+        <h3 class="benefit-title">Sabor Auténtico</h3>
+        <p class="benefit-description">Recetas tradicionales mexicanas que capturan la esencia del enchilado perfecto</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          </svg>
+        </div>
+        <h3 class="benefit-title">Picor que Enamora</h3>
+        <p class="benefit-description">El balance perfecto entre dulce y picante que conquista todos los paladares</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3 class="benefit-title">Ideal para Compartir</h3>
+        <p class="benefit-description">Perfectos para disfrutar en familia, con amigos o en cualquier momento especial</p>
       </div>
     </div>
   </section>
 
-    <!-- UBICACIÓN / MAP SECTION -->
-    <section id="ubicacion">
-      <div class="container">
-        <div class="section-header">
-          <h2>¿Dónde Encontrarnos?</h2>
-          <p>Visítanos en nuestra ubicación en Tampico</p>
-        </div>
-        <div class="map-container">
-          <div id="mapa" class="map"></div>
-        </div>
-        <div class="ubicacion-info">
-          <div class="info-card">
-            <h3>📍 Ubicación</h3>
-            <p><strong>Papelería Vignol</strong></p>
-            <p>Lomas de Rosales 387</p>
-            <p>Tampico, Tamaulipas</p>
-          </div>
-          <div class="info-card">
-            <h3>⏰ Horarios</h3>
-            <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
-            <p>Sábado: 9:00 AM - 5:00 PM</p>
-            <p>Domingo: Cerrado</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-  <section id="contacto">
-    <div class="contact-blob"></div>
-    <div class="contact-container">
-      <div class="section-header">
-        <h2><span class="gradient-text-orange">Dónde Encontrarnos</span></h2>
-        <p>Estamos listos para sorprenderte con nuestros dulces</p>
-      </div>
-
-      <div class="contact-cards">
-        <!-- Location Card -->
-        <div class="contact-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <h3>Ubicación</h3>
-          </div>
-          <p>Papelería Vignol</p>
-          <p>Lomas de Rosales 387</p>
-          <p>Tampico, Tamaulipas</p>
-        </div>
-
-        <!-- Phone Card -->
-        <div class="contact-card orange">
-          <div class="card-header">
-            <div class="card-icon orange">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-            </div>
-            <h3>Teléfono</h3>
-          </div>
-          <a href="tel:+528332920572">(833) 292-0572</a>
-          <p>Llámanos para hacer tu pedido</p>
-        </div>
-      </div>
-
-      <!-- Instagram CTA Final -->
-      <div class="contact-cta">
-        <h3><span class="gradient-text-pink">Síguenos en Instagram</span></h3>
-        <a href="https://instagram.com/pika.bitess" target="_blank" rel="noopener noreferrer" class="btn-instagram">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <circle cx="17.5" cy="6.5" r="1.5"></circle>
-          </svg>
-          @pika.bitess
-        </a>
-      </div>
+  <!-- Instagram Section -->
+  <section class="instagram-section">
+    <div class="instagram-content">
+      <h2 class="instagram-title">Síguenos en Instagram</h2>
+      <p class="instagram-description">Descubre nuestras novedades, promociones y el lado más dulce (y picante) de PikaBitess</p>
+      <a href="https://www.instagram.com/pika.bitess/" target="_blank" rel="noopener noreferrer" class="btn btn-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+        </svg>
+        @pika.bitess
+      </a>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-content">
-        <div class="footer-text">
-          <p>© 2025 PIKA BITESS. Todos los derechos reservados.</p>
-          <p class="small">Dulces Enchilados de Auténtico Sabor Mexicano</p>
-        </div>
-        <div class="footer-text right">
-          <p>Made with ❤️ and 🌶️</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <a href="https://instagram.com/pika.bitess" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <circle cx="17.5" cy="6.5" r="1.5"></circle>
-          </svg>
-        </a>
-        <a href="tel:+528332920572">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 PikaBitess. Todos los derechos reservados.</p>
   </footer>
 
-  <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('active');
-    }
-
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('mobileMenu').classList.remove('active');
-      });
-    });
-  </script>
-  <!-- Include external script file -->
   <script src="script.js"></script>
 </body>
 </html>
